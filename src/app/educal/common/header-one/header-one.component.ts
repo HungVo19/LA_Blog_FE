@@ -102,6 +102,5 @@ export class HeaderOneComponent implements OnInit {
   logOut() {
     sessionStorage.removeItem("user");
     this.router.navigate(['']).finally();
-
   }
 }

@@ -19,7 +19,6 @@ export class BlogComponent implements OnInit {
 
   public findALlByDeleteStatusIsFalse() {
     return this.blogService.findAllByDeleteStatusIsFalse().subscribe(data => {
-      console.log(data)
       this.blogItems = data;
     })
   }

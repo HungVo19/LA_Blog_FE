@@ -3,8 +3,8 @@
   <div class="sidebar__widget mb-60">
      <div class="sidebar__widget-content">
         <div class="sidebar__search p-relative">
-           <form action="#">
-              <input type="text" placeholder="Search for courses...">
+           <form [formGroup]="search" (ngSubmit)="searchBlog()">
+              <input type="text" placeholder="Search for title..." formControlName="search">
               <button type="submit">
                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 584.4 584.4" style="enable-background:new 0 0 584.4 584.4;" xml:space="preserve">
                  <g>
@@ -25,15 +25,15 @@
      </div>
      <div class="sidebar__widget-content">
         <div class="rc__post-wrapper">
-           <div class="rc__post d-flex align-items-center">
+           <div *ngFor="let b of recentBlog" class="rc__post d-flex align-items-center">
               <div class="rc__thumb mr-20">
-                 <a [routerLink]="['/blog-details']"><img src="assets/img/blog/sm/blog-sm-1.jpg" alt=""></a>
+                 <a [routerLink]="['/blog-details',b.id]"><img src="{{b.image?b.image:'https://images.unsplash.com/photo-1496395650962-374cae58ca8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxibG9nJTIwcG9zdHxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60'}}" alt=""></a>
               </div>
               <div class="rc__content">
                  <div class="rc__meta">
-                    <span>October 15, 2021</span>
+                    <span>{{b.createdDate|date:'mediumDate'}}</span>
                  </div>
-                 <h6 class="rc__title"><a [routerLink]="['/blog-details']">The Importance  Intrinsic Motivation.</a></h6>
+                 <h6 class="rc__title"><a [routerLink]="['/blog-details',b.id]">{{b.title}}</a></h6>
               </div>
            </div>
            <div class="rc__post d-flex align-items-center">
@@ -47,37 +47,26 @@
                  <h6 class="rc__title"><a [routerLink]="['/blog-details']">A Better Alternative To Grading Student.</a></h6>
               </div>
            </div>
-           <div class="rc__post d-flex align-items-center">
-              <div class="rc__thumb mr-20">
-                 <a [routerLink]="['/blog-details']"><img src="assets/img/blog/sm/blog-sm-3.jpg" alt=""></a>
-              </div>
-              <div class="rc__content">
-                 <div class="rc__meta">
-                    <span>October 15, 2021</span>
-                 </div>
-                 <h6 class="rc__title"><a [routerLink]="['/blog-details']">Strategic Social Media & Evolution of Visual</a></h6>
-              </div>
-           </div>
         </div>
      </div>
   </div>
-  <div class="sidebar__widget mb-55">
-     <div class="sidebar__widget-head mb-35">
-        <h3 class="sidebar__widget-title">Tags</h3>
-     </div>
-     <div class="sidebar__widget-content">
-        <div class="sidebar__tag">
-           <a href="#">Art & Design</a>
-           <a href="#">Course</a>
-           <a href="#">Videos</a>
-           <a href="#">App</a>
-           <a href="#">Education</a>
-           <a href="#">Data Science</a>
-           <a href="#">Machine Learning</a>
-           <a href="#">Tips</a>
-        </div>
-     </div>
-  </div>
+<!--  <div class="sidebar__widget mb-55">-->
+<!--     <div class="sidebar__widget-head mb-35">-->
+<!--        <h3 class="sidebar__widget-title">Tags</h3>-->
+<!--     </div>-->
+<!--     <div class="sidebar__widget-content">-->
+<!--        <div class="sidebar__tag">-->
+<!--           <a href="#">Art & Design</a>-->
+<!--           <a href="#">Course</a>-->
+<!--           <a href="#">Videos</a>-->
+<!--           <a href="#">App</a>-->
+<!--           <a href="#">Education</a>-->
+<!--           <a href="#">Data Science</a>-->
+<!--           <a href="#">Machine Learning</a>-->
+<!--           <a href="#">Tips</a>-->
+<!--        </div>-->
+<!--     </div>-->
+<!--  </div>-->
   <div class="sidebar__widget mb-55">
      <div class="sidebar__banner w-img">
         <img src="assets/img/blog/banner/banner-1.jpg" alt="">

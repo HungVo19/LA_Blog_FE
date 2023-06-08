@@ -3,7 +3,7 @@ import {BlogService} from "../../../service/blog.service";
 import {Blog} from "../../../model/blog";
 import {ActivatedRoute} from "@angular/router";
 import {DomSanitizer} from "@angular/platform-browser";
-import {FormGroup,FormsModule} from "@angular/forms";
+import {FormGroup} from "@angular/forms";
 import {Comment} from "../../../model/comment";
 import {CommentService} from "../../../service/comment.service";
 

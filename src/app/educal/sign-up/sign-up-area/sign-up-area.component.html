@@ -21,51 +21,71 @@
         <div class="col-xxl-6 offset-xxl-3 col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
            <div class="sign__wrapper white-bg">
               <div class="sign__header mb-35">
-                 <div class="sign__in text-center">
-                    <a href="#" class="sign__social g-plus text-start mb-15"><i class="fab fa-google-plus-g"></i>Sign Up with Google</a>
-                    <p> <span>........</span> Or, <a [routerLink]="['/sign-up']">sign up</a> with your email<span> ........</span> </p>
-                 </div>
+
+                <div class="testimonial__item text-center">
+                  <div class="testimonial__thumb">
+                    <img src="{{path?path:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}" alt="">
+                    <div class="sign__in text-center mt-3">
+                      <input type="file" id="profile-img-input" style="display: none"
+                      (change)="previewAvatar($event)">
+                      <label style="cursor: pointer" for="profile-img-input" class="sign__social g-plus text-start mb-15"><i class="fa fa-user"></i>Change Avatar</label>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="sign__form">
-                 <form action="#">
+                 <form [formGroup]="signUpForm" (ngSubmit)="submit()">
                     <div class="sign__input-wrapper mb-25">
-                       <h5>Full Name</h5>
+                       <h5>Username<span class="required" style="color: red">*</span></h5>
                        <div class="sign__input">
-                          <input type="text" placeholder="Full name">
+                          <input type="text" placeholder="Username" formControlName="username">
                           <i class="fal fa-user"></i>
                        </div>
                     </div>
                     <div class="sign__input-wrapper mb-25">
-                       <h5>Work email</h5>
+                       <h5>Password<span class="required" style="color: red">*</span></h5>
                        <div class="sign__input">
-                          <input type="text" placeholder="e-mail address">
-                          <i class="fal fa-envelope"></i>
-                       </div>
-                    </div>
-                    <div class="sign__input-wrapper mb-25">
-                       <h5>Password</h5>
-                       <div class="sign__input">
-                          <input type="text" placeholder="Password">
+                          <input [type]="inputType" placeholder="Password" formControlName="password">
                           <i class="fal fa-lock"></i>
                        </div>
                     </div>
                     <div class="sign__input-wrapper mb-10">
-                       <h5>Re-Password</h5>
+                       <h5>Re-Password<span class="required" style="color: red">*</span></h5>
                        <div class="sign__input">
-                          <input type="text" placeholder="Re-Password">
+                          <input [type]="inputType" placeholder="Re-Password" id="repassword" name="repassword"
+                          formControlName = "repassword">
                           <i class="fal fa-lock"></i>
                        </div>
                     </div>
-                    <div class="sign__action d-flex justify-content-between mb-30">
-                       <div class="sign__agree d-flex align-items-center">
-                          <input class="m-check-input" type="checkbox" id="m-agree">
-                          <label class="m-check-label" for="m-agree">I agree to the <a href="#">Terms & Conditions</a>
-                             </label>
+                   <div class="sign__input-wrapper mb-10">
+                     <div class="sign__input">
+                       <div class="events__info-discount" style="color: red"
+                       *ngIf="(signUpForm.get('username')?.errors?.['required']
+                       && signUpForm.get('username')?.touched
+                       || (signUpForm.get('password')?.errors?.['required']
+                       && signUpForm.get('password')?.touched)
+                       || signUpForm.get('repassword')?.errors?.['required']
+                       && signUpForm.get('repassword')?.touched)">
+                         All fields required!
                        </div>
+                       <div class="events__info-discount" style="color: red"
+                       *ngIf="signUpForm.get('password')?.touched && signUpForm.get('repassword')?.touched && signUpForm.errors?.['notSame']">
+                         Password mismatch!
+                       </div>
+                       <div *ngIf="showUsernameNotAvail" class="events__info-discount" style="color: red">
+                         Username not available
+                       </div>
+                     </div>
+                   </div>
+                    <div class="sign__agree d-flex align-items-center mb-30">
+                      <input class="m-check-input" id ="m-agree" type="checkbox" (change)="showPass($event)">
+                      <label for="m-agree" class="mat-checkbox-label">
+                        Show password
+                      </label>
                     </div>
-                    <button class="e-btn w-100"> <span></span> Sign Up</button>
+                    <button class="e-btn w-100" type="submit" [disabled]="!signUpForm.valid"> <span></span> Sign Up</button>
                     <div class="sign__new text-center mt-20">
-                       <p>Already in Educal ? <a [routerLink]="['/sign-in']"> Sign In</a></p>
+                       <p>Already registered ? <a [routerLink]="['/sign-in']"> Sign In</a></p>
                     </div>
                  </form>
               </div>

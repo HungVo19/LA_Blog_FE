@@ -1,7 +1,6 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {Blog} from "../../../model/blog";
 import {BlogService} from "../../../service/blog.service";
-import {NgxMasonryComponent, NgxMasonryOptions} from "ngx-masonry";
 
 
 @Component({
@@ -11,31 +10,27 @@ import {NgxMasonryComponent, NgxMasonryOptions} from "ngx-masonry";
 })
 export class BlogAreaComponent implements OnInit {
 
-  @ViewChild(NgxMasonryComponent) masonry: NgxMasonryComponent | undefined;
-
 
   blogItems: Blog[] = [];
   blogData: Blog[] = [];
   backToTop: boolean = false;
+  searchLength: number = 0;
 
-  public masonryOptions: NgxMasonryOptions = {
-    // @ts-ignore
-    transitionDuration: '1.2s',
-    gutter: 10,
-    resize: true,
-    initLayout: true,
-    fitWidth: true,
-    horizontalOrder: true,
-    itemSelector: '.masonryItem',
-    percentPosition: true,
-  };
-
-  constructor(private blogService: BlogService,
-              private elementRef: ElementRef) {
+  constructor(private blogService: BlogService) {
   }
 
   ngOnInit(): void {
+    // if(sessionStorage.getItem("keyword") == null) {
+    //   this.findALlByDeleteStatusIsFalse();
+    // } else {
+      // @ts-ignore
+    //   this.searchKeyword = sessionStorage.getItem("keyword");
+    //   this.searchBlog(this.searchKeyword);
+    //   sessionStorage.removeItem("keyword")
+    // }
+
     this.findALlByDeleteStatusIsFalse();
+
     const button = document.getElementById("backToTop") as HTMLButtonElement;
     button.hidden = true;
   }
@@ -47,6 +42,14 @@ export class BlogAreaComponent implements OnInit {
     })
   }
 
+  searchBlog(keyword: string) {
+    return this.blogService.search(keyword).subscribe(data => {
+      this.blogData = data;
+      this.searchLength = this.blogData.length;
+      this.blogItems = this.blogData.splice(0, 3);
+    })
+  }
+
   showMore() {
     if (this.blogData.length != 0) {
       this.blogItems = this.blogItems.concat(this.blogData.splice(0, 2));
@@ -54,7 +57,6 @@ export class BlogAreaComponent implements OnInit {
     if (this.blogData.length == 0) {
       const button1 = document.getElementById("showMore") as HTMLButtonElement;
       button1.hidden = true;
-
       this.backToTop = false;
     }
   }
@@ -62,4 +64,5 @@ export class BlogAreaComponent implements OnInit {
   toTop() {
     window.scrollTo(0, 0);
   }
+
 }

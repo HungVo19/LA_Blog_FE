@@ -15,4 +15,12 @@ export class UserService {
   public checkLogin(user:User) {
     return this.http.post<User>(url + "/auth",user);
   }
+
+  public checkUserExists(username:string) {
+    return this.http.get(url+ "/" +username + "/exists")
+  }
+
+  public createNewUser(user:User) {
+    return this.http.post(url,user);
+  }
 }

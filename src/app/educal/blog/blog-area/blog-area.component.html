@@ -2,9 +2,14 @@
   <div class="container">
     <div class="row">
       <div class="col-xxl-8 col-xl-8 col-lg-8">
+        <div class="row" *ngIf="searchLength != 0">
+          <div class="section__title-wrapper mb-60">
+            <h2 class="section__title">There are <span class="yellow-bg yellow-bg-big">{{searchLength}} results<img src="assets/img/shape/yellow-bg.png" alt=""></span>  for you</h2>
+            <p>You don't have to struggle alone, you've got our assistance and help.</p>
+          </div>
+        </div>
         <div class="row">
-          <ngx-masonry [options]="masonryOptions">
-            <div ngxMasonryItem *ngFor="let blog of blogItems"
+            <div *ngFor="let blog of blogItems"
                  class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 masonryItem">
               <div class="blog__wrapper">
                 <div class="blog__item white-bg transition-3 fix">
@@ -53,7 +58,6 @@
                 </div>
               </div>
             </div>
-          </ngx-masonry>
         </div>
         <br>
         <br>

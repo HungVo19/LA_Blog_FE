@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Blog} from "../../../model/blog";
 import {BlogService} from "../../../service/blog.service";
 import {ActivatedRoute} from "@angular/router";
-import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-blog-details-title',

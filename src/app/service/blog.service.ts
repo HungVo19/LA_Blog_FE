@@ -34,4 +34,8 @@ export class BlogService {
   public updateBlog(blog:Blog) {
     return this.http.put<Blog>(url,blog);
   }
+
+  public search(keyword:string) {
+    return this.http.get<Blog[]>(url + "/search?q=" + keyword);
+  }
 }

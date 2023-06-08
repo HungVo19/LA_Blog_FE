@@ -26,8 +26,9 @@ import {BlogManageMainComponent} from "./educal/blog-manage/blog-manage-main/blo
 
 
 const routes: Routes = [
-  {path: '', component: BlogComponent},
+  {path: '',component: BlogComponent},
   {path: 'home', component: BlogComponent},
+
   {
     path: 'home-two',
     component: HomeTwoComponent

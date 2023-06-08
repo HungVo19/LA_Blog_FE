@@ -1,0 +1,56 @@
+<section class="cart-area pt-100 pb-100">
+  <div class="container">
+    <div *ngIf="blogs.length == 0" class="section__title-wrapper mb-60">
+      <h2 class="section__title">Click <span class="yellow-bg yellow-bg-big"><a href=""
+                                                                                [routerLink]="['/post',-1]">Here</a><img
+        src="assets/img/shape/yellow-bg.png" alt=""></span> to create your very first post</h2>
+      <p>
+      </p>
+    </div>
+    <div class="row" *ngIf="blogs.length != 0">
+      <div>
+        <a class="e-btn e-btn-border mb-5" [routerLink]="['/post',-1]">Create New</a>
+      </div>
+      <div class="col-12 mt-5">
+        <div class="table-content table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th class="product-thumbnail">No</th>
+              <th class="product-thumbnail">Title</th>
+              <th class="cart-product-name">Description</th>
+              <th class="cart-product-name">View</th>
+              <th class="product-subtotal">Edit</th>
+              <th class="product-remove">Remove</th>
+            </tr>
+            </thead>
+            <tbody class="border-0">
+            <tr *ngFor="let b of blogs|paginate:{itemsPerPage:3,currentPage:page}; let i = index">
+              <td class="product-name">
+                {{i+1}}
+              </td>
+              <td class="product-name">
+                {{b.title}}
+              </td>
+              <td class="product-name">
+                {{b.description}}
+              </td>
+              <td class="product-quantity">
+                <a class="e-btn e-btn-border" [routerLink]="['/blog-details',b.id]">View</a>
+              </td>
+              <td class="product-quantity">
+                <a class="e-btn e-btn-border" [routerLink]="['/post',b.id]">Edit</a>
+              </td>
+              <td class="product-remove"><button class="btn" type="button" (click)="deleteBlog(b.id)"><i class="fa fa-times"></i></button></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="blogs.length != 0">
+      <pagination-controls class="text-center mt-5" (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</section>
+

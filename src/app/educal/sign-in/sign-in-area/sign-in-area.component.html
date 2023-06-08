@@ -31,11 +31,17 @@
               <div class="sign__input-wrapper mb-10">
                 <h5>Password</h5>
                 <div class="sign__input">
-                  <input type="password" placeholder="Password" formControlName="password">
+                  <input [type]="inputType" placeholder="Password" formControlName="password">
                   <i class="fal fa-lock"></i>
                 </div>
               </div>
               <div class="sign__action d-sm-flex justify-content-between mb-30">
+              </div>
+              <div class="sign__agree d-flex align-items-center mb-30">
+                <input class="m-check-input" id ="m-agree" type="checkbox" (change)="showPass($event)">
+                <label for="m-agree" class="mat-checkbox-label">
+                  Show password
+                </label>
               </div>
               <button [disabled]="!form.valid" class="e-btn  w-100"><span></span> Sign In</button>
               <div class="sign__new text-center mt-20">

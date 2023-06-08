@@ -1,6 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {Blog} from "../../../model/blog";
 import {BlogService} from "../../../service/blog.service";
+import {NgxMasonryOptions} from "ngx-masonry";
 
 
 @Component({

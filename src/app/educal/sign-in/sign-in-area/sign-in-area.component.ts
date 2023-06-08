@@ -12,6 +12,8 @@ import {Route, Router} from "@angular/router";
 export class SignInAreaComponent implements OnInit {
   user!:User;
   form!:FormGroup;
+  inputType = 'password';
+
 
   constructor(private service:UserService,
               private router:Router) { }
@@ -35,5 +37,13 @@ export class SignInAreaComponent implements OnInit {
       }
     })
 
+  }
+
+  showPass(event: any) {
+    if (event.target.checked) {
+      this.inputType = 'text'
+    } else {
+      this.inputType = 'password';
+    }
   }
 }

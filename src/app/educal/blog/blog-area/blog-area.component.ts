@@ -1,7 +1,8 @@
-import {Component,OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Blog} from "../../../model/blog";
 import {BlogService} from "../../../service/blog.service";
 import {NgxMasonryOptions} from "ngx-masonry";
+import {FormControl, FormGroup} from "@angular/forms";
 
 
 @Component({
@@ -16,19 +17,18 @@ export class BlogAreaComponent implements OnInit {
   blogData: Blog[] = [];
   backToTop: boolean = false;
   searchLength: number = 0;
+  recentBlog: Blog[] = []
+  search!: FormGroup;
+  showResult = true;
+  keyword!: string;
 
   constructor(private blogService: BlogService) {
   }
 
   ngOnInit(): void {
-    // if(sessionStorage.getItem("keyword") == null) {
-    //   this.findALlByDeleteStatusIsFalse();
-    // } else {
-      // @ts-ignore
-    //   this.searchKeyword = sessionStorage.getItem("keyword");
-    //   this.searchBlog(this.searchKeyword);
-    //   sessionStorage.removeItem("keyword")
-    // }
+    this.search = new FormGroup({
+      keyword: new FormControl('')
+    })
 
     this.findALlByDeleteStatusIsFalse();
 
@@ -40,15 +40,20 @@ export class BlogAreaComponent implements OnInit {
     return this.blogService.findAllByDeleteStatusIsFalse().subscribe(data => {
       this.blogData = data;
       this.blogItems = this.blogData.splice(0, 3);
+      this.recentBlog = data.slice(0, 4)
+      console.log(this.recentBlog)
     })
   }
 
-  searchBlog(keyword: string) {
-    return this.blogService.search(keyword).subscribe(data => {
+  searchBlog() {
+    this.keyword = this.search.get('keyword')?.value;
+    this.search.reset();
+    return this.blogService.search(this.keyword).subscribe(data => {
+      this.showResult = false;
       this.blogData = data;
       this.searchLength = this.blogData.length;
       this.blogItems = this.blogData.splice(0, 3);
-    })
+    });
   }
 
   showMore() {
@@ -65,5 +70,6 @@ export class BlogAreaComponent implements OnInit {
   toTop() {
     window.scrollTo(0, 0);
   }
+
 
 }

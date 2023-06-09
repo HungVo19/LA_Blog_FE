@@ -17,7 +17,7 @@ export class BlogDetailsAreaComponent implements OnInit {
   blogId!: number;
   content: any;
   formCmt!: any;
-  user!: any
+  userId = 0;
   comment: string = "";
   listComments: Comment[] = [];
   latestBlog:Blog[] = [];
@@ -41,7 +41,9 @@ export class BlogDetailsAreaComponent implements OnInit {
     this.formCmt = new FormGroup({})
 
     // @ts-ignore
-    this.user = JSON.parse(sessionStorage.getItem("user"));
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    // @ts-ignore
+    this.userId = user.id;
     this.getListComments(this.blogId);
   }
 
@@ -59,7 +61,7 @@ export class BlogDetailsAreaComponent implements OnInit {
       date: new Date(),
       // @ts-ignore
       user: {
-        id: this.user.id
+        id: this.userId
       },
       // @ts-ignore
       blog: {

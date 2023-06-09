@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Blog} from "../../../model/blog";
 import {BlogService} from "../../../service/blog.service";
+import {BlogAreaComponent} from "../blog-area/blog-area.component";
 
 @Component({
   selector: 'app-blog',
@@ -9,18 +10,17 @@ import {BlogService} from "../../../service/blog.service";
 })
 export class BlogComponent implements OnInit {
 
-  blogItems:Blog[] = [];
+  @ViewChild(BlogAreaComponent) blogArea!:BlogAreaComponent
 
-  constructor(private blogService:BlogService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.findALlByDeleteStatusIsFalse();
   }
 
-  public findALlByDeleteStatusIsFalse() {
-    return this.blogService.findAllByDeleteStatusIsFalse().subscribe(data => {
-      this.blogItems = data;
-    })
+  CallParentInit() {
+    this.ngOnInit();
+    this.blogArea.findALlByDeleteStatusIsFalse()
+    this.blogArea.showResult = true;
+    console.log('test call')
   }
-
 }

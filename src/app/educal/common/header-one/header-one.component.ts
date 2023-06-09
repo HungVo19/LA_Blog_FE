@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit,Input } from '@angular/core';
+import {Component, HostListener, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {User} from "../../../model/user";
 import {Router} from "@angular/router";
 
@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./header-one.component.scss']
 })
 export class HeaderOneComponent implements OnInit {
+
   user!:any;
 
   @Input () header__white : string | undefined
@@ -102,5 +103,10 @@ export class HeaderOneComponent implements OnInit {
   logOut() {
     sessionStorage.removeItem("user");
     this.router.navigate(['']).finally();
+  }
+
+  @Output() callHomeInit: EventEmitter<any> = new EventEmitter<any>();
+  callHome() {
+    this.callHomeInit.emit();
   }
 }

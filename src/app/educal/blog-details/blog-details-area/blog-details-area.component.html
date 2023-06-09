@@ -96,9 +96,8 @@
               </div>
             </div>
           </div>
-          <div class="blog__comment" *ngIf="user!= null">
+          <div class="blog__comment" *ngIf="userId!= 0">
             <h3>Write a comment</h3>
-            <!--                 <form [formGroup]="formCmt" (ngSubmit)="postCmt()">-->
             <div class="row">
               <div class="col-xxl-12">
                 <div class="blog__comment-input">
@@ -111,7 +110,6 @@
                 </div>
               </div>
             </div>
-            <!--                 </form>-->
           </div>
         </div>
       </div>

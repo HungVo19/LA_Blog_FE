@@ -20,6 +20,7 @@ export class BlogDetailsAreaComponent implements OnInit {
   user!: any
   comment: string = "";
   listComments: Comment[] = [];
+  latestBlog:Blog[] = [];
 
   constructor(private blogService: BlogService,
               private activatedRoute: ActivatedRoute,
@@ -31,6 +32,10 @@ export class BlogDetailsAreaComponent implements OnInit {
     this.activatedRoute.params.subscribe(param => {
       this.blogId = param['id'];
       this.findBlogById(this.blogId);
+    })
+
+    this.blogService.findAllByDeleteStatusIsFalse().subscribe(data => {
+      this.latestBlog = data.splice(0,2);
     })
 
     this.formCmt = new FormGroup({})

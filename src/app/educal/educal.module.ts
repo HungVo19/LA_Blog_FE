@@ -87,6 +87,10 @@ import { BlogManageAreaComponent } from './blog-manage/blog-manage-area/blog-man
 import { BlogManageMainComponent } from './blog-manage/blog-manage-main/blog-manage-main.component';
 import {AppModule} from "../app.module";
 import {NgxMasonryModule} from "ngx-masonry";
+import {MatSelectModule} from "@angular/material/select";
+import {MatButtonModule} from "@angular/material/button";
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -167,6 +171,7 @@ import {NgxMasonryModule} from "ngx-masonry";
     NewPostMainComponent,
     BlogManageAreaComponent,
     BlogManageMainComponent,
+    ConfirmationDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -180,6 +185,9 @@ import {NgxMasonryModule} from "ngx-masonry";
     NgxPaginationModule,
     AppModule,
     NgxMasonryModule,
+    MatSelectModule,
+    MatButtonModule,
+    MatDialogModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

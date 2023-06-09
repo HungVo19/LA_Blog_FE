@@ -78,8 +78,8 @@ export class SignUpAreaComponent implements OnInit {
       }
     }
     this.userService.createNewUser(this.user).subscribe(data=> {
-      sessionStorage.setItem("user",JSON.stringify(data));
-      this.router.navigate(['home']).finally();
+      // sessionStorage.setItem("user",JSON.stringify(data));
+      this.router.navigate(['sign-in']).finally();
     })
   }
 

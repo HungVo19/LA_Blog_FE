@@ -41,7 +41,9 @@
               <td class="product-quantity">
                 <a class="e-btn e-btn-border" [routerLink]="['/post',b.id]">Edit</a>
               </td>
-              <td class="product-remove"><button class="btn" type="button" (click)="deleteBlog(b.id)"><i class="fa fa-times"></i></button></td>
+              <td class="product-remove">
+                <button mat-raised-button class="btn" type="button" (click)="deleteBlog(b.id)"><i class="fa fa-times"></i></button>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -53,4 +55,5 @@
     </div>
   </div>
 </section>
+
 

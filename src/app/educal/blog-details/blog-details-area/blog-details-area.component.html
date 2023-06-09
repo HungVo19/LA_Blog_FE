@@ -1,75 +1,124 @@
 <section class="blog__area pt-120 pb-120">
   <div class="container">
-     <div class="row">
-        <div class="col-xxl-8 col-xl-8 col-lg-8">
-           <div class="blog__wrapper" >
-              <div class="blog__text mb-40" id="contentBLog" [innerHTML]="content" style="max-width: 100%">
-              </div>
-             <div class="blog__line"></div>
-              <div class="blog__meta-3 d-sm-flex justify-content-between align-items-center mb-80">
-                 <div class="blog__tag-2">
-                    <a href="#">Art & Design</a>
-                    <a href="#">Education</a>
-                    <a href="#">App</a>
-                 </div>
-                 <div class="blog__social d-flex align-items-center">
-                    <h4>Share:</h4>
-                    <ul>
-                       <li><a href="#" class="fb" ><i class="social_facebook"></i></a></li>
-                       <li><a href="#" class="tw" ><i class="social_twitter"></i></a></li>
-                       <li><a href="#" class="pin" ><i class="social_pinterest"></i></a></li>
-                    </ul>
-                 </div>
-              </div>
-              <div class="blog__author-3 d-sm-flex grey-bg mb-90">
-                 <div class="blog__author-thumb-3 mr-20">
-                    <img src="{{blog.user.avatar?blog.user.avatar:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}" alt="">
-                 </div>
-                 <div class="blog__author-content">
-                    <h4>{{blog.user.username}}</h4>
-                    <span>Author</span>
-                    <p>So I said blower wellies a blinding shot jolly good argy-bargy he nicked it, in my flat don't get shirty with me tosser.</p>
-                 </div>
-              </div>
-              <div *ngIf="listComments.length != 0" class="latest-comments mb-95">
-                 <h3>{{listComments.length}} comments</h3>
-                <div *ngFor="let c of listComments" class="comments-box grey-bg mt-2">
-                  <div class="comments-info d-flex">
-                    <div class="comments-avatar mr-20">
-                      <img src="{{c.user.avatar?c.user.avatar:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}" alt="">
-                    </div>
-                    <div class="avatar-name">
-                      <h5>{{c.user.username}}</h5>
-                      <span class="post-meta"> {{c.date}}</span>
-                    </div>
+    <div class="row">
+      <div class="col-xxl-8 col-xl-8 col-lg-8">
+        <div class="blog__wrapper">
+          <div class="blog__text mb-40" id="contentBLog" [innerHTML]="content" style="max-width: 100%">
+          </div>
+          <div class="blog__line"></div>
+          <div class="blog__meta-3 d-sm-flex justify-content-between align-items-center mb-80">
+            <div class="blog__tag-2">
+              <a href="#">Art & Design</a>
+              <a href="#">Education</a>
+              <a href="#">App</a>
+            </div>
+            <div class="blog__social d-flex align-items-center">
+              <h4>Share:</h4>
+              <ul>
+                <li><a href="#" class="fb"><i class="social_facebook"></i></a></li>
+                <li><a href="#" class="tw"><i class="social_twitter"></i></a></li>
+                <li><a href="#" class="pin"><i class="social_pinterest"></i></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="blog__author-3 d-sm-flex grey-bg mb-90">
+            <div class="blog__author-thumb-3 mr-20">
+              <img
+                src="{{blog.user.avatar?blog.user.avatar:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}"
+                alt="">
+            </div>
+            <div class="blog__author-content">
+              <h4>{{blog.user.username}}</h4>
+              <span>Author</span>
+              <p>So I said blower wellies a blinding shot jolly good argy-bargy he nicked it, in my flat don't get
+                shirty with me tosser.</p>
+            </div>
+          </div>
+          <div class="blog__recent mb-65">
+            <div class="section__title-wrapper mb-40">
+              <h2 class="section__title">Latest <span class="yellow-bg-sm">Post <img
+                src="assets/img/shape/yellow-bg-4.png" alt="">  </span></h2>
+              <p>You don't have to struggle alone, you've got our assistance and help.</p>
+            </div>
+            <div class="row">
+              <div *ngFor="let lb of latestBlog" class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+                <div class="blog__item white-bg mb-30 transition-3 fix h-100">
+                  <div class="blog__thumb w-img fix">
+                    <a [routerLink]="['/blog-details',lb.id]">
+                      <img
+                        src="{{lb.image?lb.image:'https://images.unsplash.com/photo-1496395650962-374cae58ca8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTMyfHxibG9nJTIwcG9zdHxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60'}}"
+                        alt="">
+                    </a>
                   </div>
-                  <div class="comments-text ml-65">
-                    <p>{{c.content}}</p>
+                  <div class="blog__content">
+                    <!--                       <div class="blog__tag">-->
+                    <!--                         <a href="#">Art & Design</a>-->
+                    <!--                       </div>-->
+                    <h3 class="blog__title"><a [routerLink]="['/blog-details',lb.id]">{{lb.title}}</a></h3>
+
+                    <div class="blog__meta d-flex align-items-center justify-content-between">
+                      <div class="blog__author d-flex align-items-center">
+                        <div class="blog__author-thumb mr-10">
+                          <img
+                            src="{{lb.user.avatar?lb.user.avatar:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}"
+                            alt="">
+                        </div>
+                        <div class="blog__author-info">
+                          <h5>{{lb.user.username}}</h5>
+                        </div>
+                      </div>
+                      <div class="blog__date d-flex align-items-center">
+                        <i class="fal fa-clock"></i>
+                        <span>{{lb.createdDate | date: 'mediumDate'}}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="blog__comment" *ngIf="user!= null">
-                 <h3>Write a comment</h3>
-<!--                 <form [formGroup]="formCmt" (ngSubmit)="postCmt()">-->
-                    <div class="row">
-                       <div class="col-xxl-12">
-                          <div class="blog__comment-input">
-                             <textarea placeholder="Enter your comment ..." [(ngModel)]="comment"></textarea>
-                          </div>
-                       </div>
-                       <div class="col-xxl-12">
-                          <div class="blog__comment-btn">
-                             <button type="button" class="e-btn" (click)="postCmt()">Post Comment</button>
-                          </div>
-                       </div>
-                    </div>
-<!--                 </form>-->
+            </div>
+          </div>
+          <div *ngIf="listComments.length != 0" class="latest-comments mb-95">
+            <h3>{{listComments.length}} comments</h3>
+            <div *ngFor="let c of listComments" class="comments-box grey-bg mt-2">
+              <div class="comments-info d-flex">
+                <div class="comments-avatar mr-20">
+                  <img
+                    src="{{c.user.avatar?c.user.avatar:'https://www.pphfoundation.ca/wp-content/uploads/2018/05/default-avatar.png'}}"
+                    alt="">
+                </div>
+                <div class="avatar-name">
+                  <h5>{{c.user.username}}</h5>
+                  <span class="post-meta"> {{c.date}}</span>
+                </div>
               </div>
-           </div>
+              <div class="comments-text ml-65">
+                <p>{{c.content}}</p>
+              </div>
+            </div>
+          </div>
+          <div class="blog__comment" *ngIf="user!= null">
+            <h3>Write a comment</h3>
+            <!--                 <form [formGroup]="formCmt" (ngSubmit)="postCmt()">-->
+            <div class="row">
+              <div class="col-xxl-12">
+                <div class="blog__comment-input">
+                  <textarea placeholder="Enter your comment ..." [(ngModel)]="comment"></textarea>
+                </div>
+              </div>
+              <div class="col-xxl-12">
+                <div class="blog__comment-btn">
+                  <button type="button" class="e-btn" (click)="postCmt()">Post Comment</button>
+                </div>
+              </div>
+            </div>
+            <!--                 </form>-->
+          </div>
         </div>
-        <div class="col-xxl-4 col-xl-4 col-lg-4">
-           <app-blog-sidebar></app-blog-sidebar>
-        </div>
-     </div>
+      </div>
+      <div class="col-xxl-4 col-xl-4 col-lg-4">
+        <app-blog-sidebar></app-blog-sidebar>
+      </div>
+    </div>
   </div>
 </section>
+

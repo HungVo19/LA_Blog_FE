@@ -1,4 +1,5 @@
 import {User} from "./user";
+import {Comment} from "./comment";
 
 export interface Blog {
   id?:number;
@@ -9,4 +10,5 @@ export interface Blog {
   createdDate:Date;
   user:User;
   deleteStatus:boolean;
+  comments?:Comment[];
 }
